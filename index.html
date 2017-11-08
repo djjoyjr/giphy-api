@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>DJ's Giphy Dump</title>
@@ -9,35 +9,66 @@
     <div id="show-buttons"></div>
     <form id="show-form">
       <h1>Enter your favorite TV Show:  </h1>
-      <input type="text" id="show-input" placeholder="e.g. Breaking Bad">
+      <input type="text" id="show-input" placeholder="e.g. Sesame Street">
       <input id="sumbit-animal" type="submit" value="submit">
     </form>
     <div id="show-gifs">
     </div>
+  <script>
+  $(document).ready( function(){
+
+    var tvShows = ["arrested development", "breaking bad", "scrubs", "the office", "parks and recreation", "mr robot", "the walking dead", "mad men", "lost", "modern family"];
+
+    for (var i = 0; i < tvShows.length; i++) {
+      $("#show-buttons").append("<button class=' btn btn-light btn-sm' id='"+tvShows[i]+"'> "+tvShows[i]+"</button>");
+    }
+
+    var trendingURL = "https://api.giphy.com/v1/gifs/trending?api_key=K4KU6OMUATEW1UmbAjY53j4ZGoSI0e9Y";
+
+    $.ajax({
+      url: trendingURL,
+      method: 'GET'
+    }).done(function(response) {
+      console.log(response);
+        for (var i = 0; i < 10; i++) {
+          var still = response.data[i].images.original_still.url;
+          var id = response.data[i].id;
+          $("#show-gifs").append('<img src=' + still + ' id='+id+' >'); //this click event returns img src url and id from response
+        }
+        //on click event when still image is clicked on
+        $("#show-gifs").on('click', 'img', function() {
+          alert("this is an image");
+          console.log(this.id);
+        });
+
+    });
 
 
+//on click event when a button is clicked on
+$("#show-buttons").on('click', '.btn', function() {
+  alert("this is a button");
+  console.log(this.id);
+  var buttonURL = "https://api.giphy.com/v1/gifs/search?q=" +(this.id) + "&api_key=K4KU6OMUATEW1UmbAjY53j4ZGoSI0e9Y";
+  $.ajax({
+    url: buttonURL,
+    method: 'GET'
+  }).done(function(response) {
+    console.log(response);
+      for (var i = 0; i < 10; i++) {
+        var still = response.data[i].images.original_still.url;
+        var id = response.data[i].id;
+        $("#show-gifs").append('<img src=' + still + ' "id='+id+'" >'); //this click event returns img src url and id from response
+      }
+    });
 
-<script>
-var tvShows = ["arrested development", "breaking bad", "scrubs", "the office", "parks and recreation", "mr robot", "the walking dead", "mad men", "lost", "dexter"];
-
-for (var i = 0; i < tvShows.length; i++) {
-  console.log(tvShows[i]);
-  $("#show-buttons").append("<button class=' btn btn-light btn-sm' id='"+tvShows[i]+"'> "+tvShows[i]+"</button>");
-}
-
-var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=K4KU6OMUATEW1UmbAjY53j4ZGoSI0e9Y";
-
-$.ajax({
-  url: queryURL,
-  method: 'GET'
-}).done(function(response) {
-  var ezGif = response.data[0].images.original.url;
-  $("#show-gifs").html('<img src=' + ezGif + '>');
 });
 
 
 
-</script>
+
+
+}); //end of document ready function
+  </script>
 
 
 
