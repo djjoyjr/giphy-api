@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DJ's Giphy Dump</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="show-buttons"></div>
+    <form id="show-form">
+      <h1>Enter your favorite TV Show:  </h1>
+      <input type="text" id="show-input" placeholder="e.g. Breaking Bad">
+      <input id="sumbit-animal" type="submit" value="submit">
+    </form>
+    <div id="show-gifs">
+    </div>
+
+
+
+<script>
+var tvShows = ["arrested development", "breaking bad", "scrubs", "the office", "parks and recreation", "mr robot", "the walking dead", "mad men", "lost", "dexter"];
+
+for (var i = 0; i < tvShows.length; i++) {
+  console.log(tvShows[i]);
+  $("#show-buttons").append("<button class=' btn btn-light btn-sm' id='"+tvShows[i]+"'> "+tvShows[i]+"</button>");
+}
+
+var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=K4KU6OMUATEW1UmbAjY53j4ZGoSI0e9Y";
+
+$.ajax({
+  url: queryURL,
+  method: 'GET'
+}).done(function(response) {
+  var ezGif = response.data[0].images.original.url;
+  $("#show-gifs").html('<img src=' + ezGif + '>');
+});
+
+
+
+</script>
+
+
+
+  </body>
+</html>
