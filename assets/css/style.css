@@ -3,13 +3,29 @@
   margin-left: auto;
   margin-right: auto;
 }
-.show{
+.show {
   display: inline-block;
-
+  font-family: 'Play', sans-serif;
+  color: white;
 }
-.img{
+.img {
   padding: 100px;
   margin: 100px;
   border-style: inset;
-
+}
+body{
+  background-image: url(https://media.giphy.com/media/l2SqgVssTNxfeAtwI/giphy.gif);
+  font-family: 'Play', sans-serif;
+  color: white;
+}
+.container {
+  font-family: 'Play', sans-serif;
+  color: white;
+}
+h1, h2 {
+  font-family: 'Play', sans-serif;
+  color: white;
+}
+button{
+  background-color: darkgrey;
 }

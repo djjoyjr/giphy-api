@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var tvShows = ["arrested development", "breaking bad", "scrubs", "the office", "parks and recreation", "mr robot", "the walking dead", "simpsons", "luke cage", "modern family"];
+  var tvShows = ["Arrested Development", "Breaking Bad", "Scrubs", "The Office", "Parks and Recreation", "Mr Robot", "Always Sunny in Philadephia", "The Simpsons", "The Good Place", "Modern Family"];
 
     function makeButtons (){
       $("#show-buttons").empty();
@@ -20,8 +20,14 @@ $(document).ready(function(){
   });
 
   function animateGif() {
-    $(this.id).attr('clicked');
-    changeTheme();
+    if ($(this).attr("data-state") ==="still") {
+      $(this).attr("src", $(this).attr('data-animate'));
+      $(this).attr("data-state", 'animate');
+    }
+    else {
+      $(this).attr("src", $(this).attr('data-still'));
+      $(this).attr("data-state", "still");
+    }
   }
 
   function changeTheme() {
@@ -34,16 +40,14 @@ $(document).ready(function(){
         console.log(response);
         $("#show-gifs").empty();
           for (var i = 0; i < 10; i++) {
-            var still = response.data[i].images.original_still.url;
+            var image = response.data[i].images.original_still.url;
             var animated = response.data[i].images.original.url;
             var id = response.data[i].id;
-            var notStill = response.data[i].images.original.url;
             var showDiv = $("<div class='show'>");
             var rating = response.data[i].rating;
-            var displayRating = $("<p>").text("Rating: " + rating);
+            var displayRating = $("<h2>").text("Rating: " + rating);
             showDiv.append(displayRating);
-            var image = $("<img>").attr({"src": still, "id": id, "height":250});
-            var image = $("<img>").attr({"src": animated, "id": id, "height":250});
+            image = $("<img>").attr({"src": image, "id": id, "height":250, "data-still": image, "data-animate": animated, "data-state": 'still', "class": 'gif'});
             showDiv.append(image);
             $("#show-gifs").append(showDiv);
           }
