@@ -4,95 +4,23 @@
     <meta charset="utf-8">
     <title>DJ's Giphy Dump</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./assets/javascript/gifs.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
     <div id="show-buttons"></div>
+    <div class="container">
     <form id="show-form">
       <h1>Enter your favorite TV Show:  </h1>
       <input type="text" id="show-input" placeholder="e.g. Sesame Street">
       <input id="submit-show" type="submit" value="submit">
     </form>
-    <div id="show-gifs">
-    </div>
+    <div id="show-gifs"></div>
+  </div> <!-- end of container -->
   <script>
 
-  $(document).ready(function(){
-    var trendingURL = "https://api.giphy.com/v1/gifs/trending?api_key=K4KU6OMUATEW1UmbAjY53j4ZGoSI0e9Y";
-    var tvShows = ["arrested development", "breaking bad", "scrubs", "the office", "parks and recreation", "mr robot", "the walking dead", "mad men", "luke cage", "modern family"];
-
-      $.ajax({
-        url: trendingURL,
-        method: 'GET'
-      }).done(function(response) {
-        console.log(response);
-        $("#show-gifs").empty();
-          for (var i = 0; i < 10; i++) {
-            var still = response.data[i].images.original_still.url;
-            var id = response.data[i].id;
-            var notStill = response.data[i].images.original.url;
-            var showDiv = $("<div class='show'>");
-            var rating = response.data[i].rating;
-            var displayRating = $("<p>").text("Rating: " + rating);
-            showDiv.append(displayRating);
-            var image = $("<img>").attr({"src": still, "id": id, "height":250});
-            showDiv.append(image);
-            $("#show-gifs").prepend(showDiv);
-        };
-      });
-
-      function makeButtons (){
-        $("#show-buttons").empty();
-        for (var i = 0; i < tvShows.length; i++) {
-          var newButton = $("<button>");
-          newButton.addClass("show");
-          newButton.attr("data-name", tvShows[i]);
-          newButton.text(tvShows[i]);
-          $("#show-buttons").append(newButton);
-        };
-      };
-
-    $("#submit-show").on("click", function(event) {
-      event.preventDefault();
-      alert("submit");
-      var newShow = $("#show-input").val().trim();
-      tvShows.push(newShow);
-      makeButtons();
-    });
-
-    // function animateGif() {
-    //   console.log(this.id);
-    // }
-
-    function changeTheme() {
-        var show = $(this).attr("data-name");
-        var changeURL = "https://api.giphy.com/v1/gifs/search?q=" + show + "&api_key=K4KU6OMUATEW1UmbAjY53j4ZGoSI0e9Y";
-        $.ajax({
-          url: changeURL,
-          method: "GET"
-        }).done(function(response) {
-          console.log(response);
-          $("#show-gifs").empty();
-            for (var i = 0; i < 10; i++) {
-              var still = response.data[i].images.original_still.url;
-              var id = response.data[i].id;
-              var notStill = response.data[i].images.original.url;
-                var showDiv = $("<div class='show'>");
-                var rating = response.data[i].rating;
-                var displayRating = $("<p>").text("Rating: " + rating);
-                showDiv.append(displayRating);
-                var image = $("<img>").attr({"src": still, "id": id, "height":250});
-                showDiv.append(image);
-                $("#show-gifs").prepend(showDiv);
-            }
-        });
-    }
-
-      // $(document).on("click", "img", animateGif);
-      $(document).on("click", "button", changeTheme);
-
-  makeButtons();
-});
-//end of document ready function
   </script>
   </body>
 </html>
