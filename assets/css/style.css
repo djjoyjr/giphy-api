@@ -9,12 +9,11 @@
   color: white;
 }
 .img {
-  padding: 100px;
-  margin: 100px;
   border-style: inset;
 }
 body{
   background-image: url(https://media.giphy.com/media/l2SqgVssTNxfeAtwI/giphy.gif);
+  background-size: 100%;
   font-family: 'Play', sans-serif;
   color: white;
 }
@@ -26,6 +25,25 @@ h1, h2 {
   font-family: 'Play', sans-serif;
   color: white;
 }
-button{
-  background-color: darkgrey;
+.gif{
+  padding: 15px;
+}
+.btn-change6{
+    height: 60px;
+    width: 160px;
+    background-image: url(../images/tvbg.png);
+    margin: 5px;
+    float: left;
+    border:0px;
+    color:#fff;
+    box-shadow: 0 0 1px #ccc;
+    -webkit-transition-duration: 0.2s;
+    -webkit-transition-timing-function: linear;
+    box-shadow:0px 0 0 #31708f  inset;
+    font-size: 13px;
+    background-color: darkgrey;
+}
+.btn-change6:hover{
+    box-shadow:0 0 0 25px black  inset;
+    -webkit-transform: scale(1);
 }
