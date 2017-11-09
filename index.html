@@ -10,40 +10,26 @@
     <form id="show-form">
       <h1>Enter your favorite TV Show:  </h1>
       <input type="text" id="show-input" placeholder="e.g. Sesame Street">
-      <input id="sumbit-show" type="submit" value="submit">
+      <input id="submit-show" type="submit" value="submit">
     </form>
     <div id="show-gifs">
     </div>
   <script>
 
   $(document).ready(function(){
-
     var trendingURL = "https://api.giphy.com/v1/gifs/trending?api_key=K4KU6OMUATEW1UmbAjY53j4ZGoSI0e9Y";
-    var tvShows = ["arrested development", "breaking bad", "scrubs", "the office", "parks and recreation", "mr robot", "the walking dead", "mad men", "lost", "modern family"];
+    var tvShows = ["arrested development", "breaking bad", "scrubs", "the office", "parks and recreation", "mr robot", "the walking dead", "mad men", "luke cage", "modern family"];
 
-    function makeButtons (){
-      $("#show-buttons").empty();
-      for (var i = 0; i < tvShows.length; i++) {
-        var newButton = $("<button>");
-        newButton.addClass("button");
-        newButton.attr("data-name", tvShows[i]);
-        newButton.text(tvShows[i]);
-        $("#show-buttons").append(newButton);
-      };
-    };
-
-    $.ajax({
-      url: trendingURL,
-      method: 'GET'
-    }).done(function(response) {
-      console.log(response);
-      $("#show-gifs").empty();
-        for (var i = 0; i < 10; i++) {
-          var still = response.data[i].images.original_still.url;
-          var id = response.data[i].id;
-          var notStill = response.data[i].images.original.url;
-          // $("#show-gifs").prepend('<img src=' + still + ' id='+id+' >'); //this click event returns img src url and id from response
-            // Creating a div to hold the movie
+      $.ajax({
+        url: trendingURL,
+        method: 'GET'
+      }).done(function(response) {
+        console.log(response);
+        $("#show-gifs").empty();
+          for (var i = 0; i < 10; i++) {
+            var still = response.data[i].images.original_still.url;
+            var id = response.data[i].id;
+            var notStill = response.data[i].images.original.url;
             var showDiv = $("<div class='show'>");
             var rating = response.data[i].rating;
             var displayRating = $("<p>").text("Rating: " + rating);
@@ -54,9 +40,28 @@
         };
       });
 
-    function animateGif() {
-      console.log(this.id);
-    }
+      function makeButtons (){
+        $("#show-buttons").empty();
+        for (var i = 0; i < tvShows.length; i++) {
+          var newButton = $("<button>");
+          newButton.addClass("show");
+          newButton.attr("data-name", tvShows[i]);
+          newButton.text(tvShows[i]);
+          $("#show-buttons").append(newButton);
+        };
+      };
+
+    $("#submit-show").on("click", function(event) {
+      event.preventDefault();
+      alert("submit");
+      var newShow = $("#show-input").val().trim();
+      tvShows.push(newShow);
+      makeButtons();
+    });
+
+    // function animateGif() {
+    //   console.log(this.id);
+    // }
 
     function changeTheme() {
         var show = $(this).attr("data-name");
@@ -82,7 +87,7 @@
         });
     }
 
-      $(document).on("click", "img", animateGif);
+      // $(document).on("click", "img", animateGif);
       $(document).on("click", "button", changeTheme);
 
   makeButtons();
