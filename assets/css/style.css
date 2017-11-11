@@ -10,6 +10,9 @@
 }
 .img {
   border-style: inset;
+  height: 200px;
+  width: 200px;
+  border-radius: 5px;
 }
 body{
   background-image: url(https://media.giphy.com/media/l2SqgVssTNxfeAtwI/giphy.gif);
@@ -26,8 +29,15 @@ h1, h2 {
   color: white;
 }
 .gif{
-  padding: 15px;
-}
+  padding-top: 15px;
+  padding-right:72px;
+  padding-bottom: 92px;
+  padding-left: 17px;
+  background-image: url(../images/tvset.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  border-radius: 25px;
+  }
 .btn-change6{
     height: 60px;
     width: 160px;

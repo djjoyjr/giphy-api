@@ -15,7 +15,17 @@ $(document).ready(function(){
   $("#submit-show").on("click", function(event) {
     event.preventDefault();
     var newShow = $("#show-input").val().trim();
-    tvShows.push(newShow);
+    var unique = true;
+      for (var i=0; i<tvShows.length; i++) {
+      var showButtons = tvShows[i];
+      //compares input against existing buttons in the array to prevent duplicate buttons
+        if (newShow == showButtons || newShow == null) {
+          unique = false;
+        }
+      }
+      if (unique == true){
+      tvShows.push(newShow);
+      }
     $('#show-input').val('');
     makeButtons();
   });
@@ -48,7 +58,7 @@ $(document).ready(function(){
             var rating = response.data[i].rating;
             var displayRating = $("<h2>").text("Rating: " + rating);
             showDiv.append(displayRating);
-            image = $("<img>").attr({"src": image, "id": id, "height":200, "data-still": image, "data-animate": animated, "data-state": 'still', "class": 'gif'});
+            image = $("<img>").attr({"src": image, "id": id, "width":300, "height": 300, "data-still": image, "data-animate": animated, "data-state": 'still', "class": 'gif'});
             showDiv.append(image);
             $("#show-gifs").append(showDiv);
           }
