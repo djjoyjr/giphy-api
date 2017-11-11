@@ -16,6 +16,7 @@ $(document).ready(function(){
     event.preventDefault();
     var newShow = $("#show-input").val().trim();
     tvShows.push(newShow);
+    $('#show-input').val('');
     makeButtons();
   });
   //changes from still pic to animated gif when an image is clicked
