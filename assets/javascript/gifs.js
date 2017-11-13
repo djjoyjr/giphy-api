@@ -58,7 +58,7 @@ $(document).ready(function(){
             var rating = response.data[i].rating;
             var displayRating = $("<h2>").text("Rating: " + rating);
             showDiv.append(displayRating);
-            image = $("<img>").attr({"src": image, "id": id, "width":300, "height": 300, "data-still": image, "data-animate": animated, "data-state": 'still', "class": 'gif'});
+            image = $("<img>").attr({"src": image, "id": id, "width":285, "height": 287, "data-still": image, "data-animate": animated, "data-state": 'still', "class": 'gif'});
             showDiv.append(image);
             $("#show-gifs").append(showDiv);
           }
