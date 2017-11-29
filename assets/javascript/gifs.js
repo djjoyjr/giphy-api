@@ -50,7 +50,7 @@ $(document).ready(function(){
       }).done(function(response) {
         console.log(response);
         $("#show-gifs").empty();
-          for (var i = 0; i < 10; i++) {
+          for (var i = 0; i < 12; i++) {
             var image = response.data[i].images.original_still.url;
             var animated = response.data[i].images.original.url;
             var id = response.data[i].id;
