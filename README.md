@@ -1,1 +1,3 @@
 # giphy-api
+
+This is a silly, but fun single-page web application that makes API calls to giphy.com based on 10 preset TV Show buttons.  Users have the option of adding any other TV Show of their choice via a submit field (really, they can search for anything that they want...but since the page it TV show themed, let's just pretend that they should only search for shows).  Once a search is created, a new button will be dynamically created at the top of the page.  When clicked, the button should populate the page with still images.  When those images are clicked, they 'become' animated gifs.  If the images are clicked again, they revert to still images.  
